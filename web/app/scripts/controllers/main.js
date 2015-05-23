@@ -8,13 +8,8 @@
  * Controller of the app
  */
 app.controller('MainCtrl', function ($scope, $timeout) {
-  $scope.awesomeThings = [
-    'HTML5 Boilerplate',
-    'AngularJS',
-    'Karma'
-  ];
 
-  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+  $scope.labels = ["13h30", "13h35", "13h40", "13h45", "13h50", "13h55", "14h00"];
   $scope.data = [
     [65, 59, 80, 81, 56, 55, 40]
   ];
@@ -34,9 +29,6 @@ app.controller('MainCtrl', function ($scope, $timeout) {
   };
 
   $timeout(function () {
-    $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-    $scope.data = [
-      [65, 59, 80, 81, 56, 55, 40]
-    ];
+    // Insert the update here
   }, 3000);
 });

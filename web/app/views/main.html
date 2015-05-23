@@ -1,0 +1,28 @@
+<div class="home">
+  <div class="row">
+    <div class="col-md-12 header">
+      <h1><i class="fa fa-home"></i> Main Dashboard</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 home-box-power">
+      <h2>970 W</h2>
+      <span class="power-label">Consumed at the moment</span>
+
+      <ul class="list-group">
+        <a href="#" class="list-group-item"><span class="badge">110 W</span> Garage Plug #1</a>
+        <a href="#" class="list-group-item"><span class="badge">500 W</span> Kitchen Plug #1</a>
+        <a href="#" class="list-group-item"><span class="badge">5000 W</span> Shower</a>
+        <a href="#" class="list-group-item show-more">See full list <i class="fa fa-angle-right"></i></a>
+      </ul>
+
+    </div>
+    <div class="col-md-8">
+      <canvas id="line" class="chart chart-line" data="data"
+      labels="labels" legend="false" series="series" options="options"
+      click="onClick">
+      </canvas> 
+    </div>
+  </div>
+</div>

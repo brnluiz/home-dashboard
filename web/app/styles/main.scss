@@ -1,0 +1,62 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+@import "sidebar.scss";
+@import "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800";
+
+body {
+  padding: 0;
+  font-family: "Open Sans";
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Open Sans";
+}
+$power-color: orange;
+$power-color-sub: #999;
+.home {
+  .header {
+    text-align: center;
+    h1 {
+      text-align: center;
+      padding: 10px 0 20px;
+      margin: 30px 0 45px;
+      font-size: 45px;
+      font-weight: 300;
+    }
+
+  }
+  .home-box-power {
+    h2 {
+      font-size: 76px;
+      color: $power-color;
+      text-align: left;
+      margin: 0
+    }
+    .power-label {
+      color: $power-color-sub;
+      display: block;
+      text-align: left;
+    }
+    .list-group {
+      border-radius: none;
+      margin-top: 30px;
+
+      .show-more {
+        background: #f5f5f5;
+        color: #333;
+        text-align: right;
+
+        &:hover { background: #eaeaea; }
+        .fa{ margin-left: 5px }
+      }
+    }
+  }
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 960px;
+  }
+}

@@ -16,35 +16,39 @@ class InitialTable extends Migration {
 		Schema::create('devices_types', function($table) {
 		  $table->increments('id');
 		  $table->string('name');
+			
+			$table->timestamps();
 			$table->softDeletes();
 		});
 
 		Schema::create('devices', function($table) {
 		  $table->increments('id');
-		  $table->integer('id_type')->unsigned();
+		  $table->integer('device_type_id')->unsigned();
 		  $table->string('name');
+		  $table->string('version');
 		  $table->json('settings'); // It will be different if the device uses TCP, Bluetooth or ZigBee
 
 			$table->timestamps();
 			$table->softDeletes();
 
-		  $table->foreign('id_type')->references('id')->on('devices_types')->onDelete('cascade');
+		  $table->foreign('device_type_id')->references('id')->on('devices_types')->onDelete('cascade');
 		});
 
 		Schema::create('devices_actions', function($table) {
 		  $table->increments('id');
-		  $table->string('action');
+		  $table->string('name');
+
+			$table->timestamps();
 			$table->softDeletes();
 		});
 
 		Schema::create('history_power', function($table) {
 		  $table->increments('id');
-		  $table->integer('id_device')->unsigned();
+		  $table->integer('device_id')->unsigned();
 		  
-		  $table->double('tension_value', 7, 5);
-		  $table->double('tension_phase', 3, 3);
-		  $table->double('current_value', 7, 5);
-		  $table->double('current_phase', 3, 3);
+		  $table->double('tension', 7, 5);
+		  $table->double('current', 7, 5);
+		  $table->double('phase', 3, 3);
 		  $table->double('power_total', 7, 5);
 		  $table->double('power_active', 7, 5);
 		  $table->double('power_reactive', 7, 5);
@@ -53,13 +57,13 @@ class InitialTable extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 		  
-		  $table->foreign('id_device')->references('id')->on('devices')->onDelete('cascade');
+		  $table->foreign('device_id')->references('id')->on('devices')->onDelete('cascade');
 		});
 
 		Schema::create('history_actions', function($table) {
 		  $table->increments('id');
-		  $table->integer('id_device')->unsigned();
-		  $table->integer('id_action')->unsigned();
+		  $table->integer('device_id')->unsigned();
+		  $table->integer('device_action_id')->unsigned();
 		  
 		  $table->json('data_sent');
 		  $table->json('data_received');
@@ -68,8 +72,8 @@ class InitialTable extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 		  
-		  $table->foreign('id_device')->references('id')->on('devices')->onDelete('cascade');
-		  $table->foreign('id_action')->references('id')->on('devices_actions')->onDelete('cascade');
+		  $table->foreign('device_id')->references('id')->on('devices')->onDelete('cascade');
+		  $table->foreign('device_action_id')->references('id')->on('devices_actions')->onDelete('cascade');
 		});
 
 		Schema::create('history_prices', function($table) {
@@ -87,7 +91,10 @@ class InitialTable extends Migration {
 		Schema::create('settings', function($table) {
 		  $table->increments('id');
 
-		  $table->integer('default_tension');
+		  $table->string('name');
+		  $table->string('value');
+			
+			$table->timestamps();
 		});
 
 	}

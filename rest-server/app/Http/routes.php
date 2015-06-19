@@ -11,18 +11,16 @@
 |
 */
 
-$app->get('/', function() use ($app) {
-    return $app->welcome();
+Route::get('/', function () {
+    return view('welcome');
 });
 
-$app->get('/devices','App\Http\Controllers\DeviceController@index');
-$app->post('/devices','App\Http\Controllers\DeviceController@save');
+Route::get('user/{id}', 'UserController@showProfile');
+Route::get('/devices','DeviceController@index');
+Route::post('/devices','DeviceController@save');
  
-$app->get('/devices/{id}','App\Http\Controllers\DeviceController@get');
-$app->put('/devices/{id}','App\Http\Controllers\DeviceController@update');
-$app->delete('/devices/{id}','App\Http\Controllers\DeviceController@delete');
+Route::get('/devices/{id}','DeviceController@get');
+Route::put('/devices/{id}','DeviceController@update');
+Route::delete('/devices/{id}','DeviceController@delete');
 
-$app->get('/devices/{id}/stats','App\Http\Controllers\DeviceController@stats'); 
-
-
-// { connection: 'tcp', ip: '192.168.1.3', port: '80' }
+Route::get('/devices/{id}/stats','DeviceController@stats'); 

@@ -3,8 +3,9 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-use App\DeviceAction;
+use App\DeviceMode;
 use App\DeviceType;
+use App\DeviceAction;
 use App\Device;
 use App\Setting;
 
@@ -19,10 +20,33 @@ class DatabaseSeeder extends Seeder {
   {
     Model::unguard();
 
+    $this->call('DeviceModeSeeder');
     $this->call('DeviceTypeSeeder');
     $this->call('DeviceActionSeeder');
     $this->call('DeviceSeeder');
     $this->call('SettingSeeder');
+  }
+
+}
+
+
+class DeviceModeSeeder extends Seeder {
+
+  /**
+   * Run the database seeds.
+   *
+   * @return void
+   */
+  public function run()
+  {
+    $modes = array(
+      array('name' => 'ipv6'),
+      array('name' => 'ipv4'),
+      array('name' => 'bluetooth'),
+    );
+    
+    foreach ($modes as $mode) 
+      DeviceMode::firstOrCreate($mode);
   }
 
 }
@@ -94,9 +118,13 @@ class DeviceSeeder extends Seeder {
   public function run()
   {
     $devices = array(
-      array('name' => 'Meter Plug Beta', 
+      array(
+        'name' => 'Meter Plug Beta', 
         'version' => '1.0.0.0', 
-        'device_type_id' => DeviceType::where('name', 'smart-plug')->get()[0]->id )
+        'device_type_id' => DeviceType::where('name', 'smart-plug')->get()[0]->id,
+        'device_mode_id' => DeviceMode::where('name', 'ipv4')->get()[0]->id, 
+        'settings' => '{"ip": "10.0.0.2", "port": "80"}',
+      ),
     );
 
     foreach ($devices as $device) 

@@ -16,10 +16,14 @@ Route::get('/', function () {
 });
 
 Route::get('user/{id}', 'UserController@showProfile');
+
+Route::get('/history','HistoryController@index');
+Route::get('/history/{id}','HistoryController@get');
+
+
 Route::get('/devices','DeviceController@index');
-Route::post('/devices','DeviceController@save');
- 
 Route::get('/devices/{id}','DeviceController@get');
+Route::post('/devices','DeviceController@save'); 
 Route::put('/devices/{id}','DeviceController@update');
 Route::delete('/devices/{id}','DeviceController@delete');
 

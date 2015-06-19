@@ -20,6 +20,7 @@ class DeviceController extends Controller{
  
     $device  = Device::find($id);
     $device->type;
+    $device->mode;
 
     return response()->json($device);
   }

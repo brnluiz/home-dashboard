@@ -3,7 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 
 
-class DevicePower extends Model
+class HistoryPower extends Model
 {
   protected $table = 'history_power';
   protected $fillable = [
@@ -13,7 +13,7 @@ class DevicePower extends Model
     'price '];
 
     public function device($id) {
-      return $this->belongsTo('App\Device', 'id');
+      return $this->belongsTo('App\Device', 'device_id');
     }
 
 }

@@ -21,9 +21,18 @@ class InitialTable extends Migration {
 			$table->softDeletes();
 		});
 
+		Schema::create('devices_modes', function($table) {
+		  $table->increments('id');
+		  $table->string('name');
+			
+			$table->timestamps();
+			$table->softDeletes();
+		});
+
 		Schema::create('devices', function($table) {
 		  $table->increments('id');
 		  $table->integer('device_type_id')->unsigned();
+		  $table->integer('device_mode_id')->unsigned();
 		  $table->string('name');
 		  $table->string('version');
 		  $table->json('settings'); // It will be different if the device uses TCP, Bluetooth or ZigBee
@@ -32,6 +41,7 @@ class InitialTable extends Migration {
 			$table->softDeletes();
 
 		  $table->foreign('device_type_id')->references('id')->on('devices_types')->onDelete('cascade');
+		  $table->foreign('device_mode_id')->references('id')->on('devices_modes')->onDelete('cascade');
 		});
 
 		Schema::create('devices_actions', function($table) {
@@ -46,13 +56,13 @@ class InitialTable extends Migration {
 		  $table->increments('id');
 		  $table->integer('device_id')->unsigned();
 		  
-		  $table->double('tension', 7, 5);
-		  $table->double('current', 7, 5);
-		  $table->double('phase', 3, 3);
-		  $table->double('power_total', 7, 5);
-		  $table->double('power_active', 7, 5);
-		  $table->double('power_reactive', 7, 5);
-		  $table->double('price', 7, 3);
+		  $table->double('tension', 10, 3);
+		  $table->double('current', 10, 3);
+		  $table->double('phase', 6, 3);
+		  $table->double('power_total', 10, 3);
+		  $table->double('power_active', 10, 3);
+		  $table->double('power_reactive', 10, 3);
+		  $table->double('price', 15, 3);
 
 			$table->timestamps();
 			$table->softDeletes();
@@ -82,7 +92,7 @@ class InitialTable extends Migration {
 		  $table->date('date_start');
 		  $table->time('time_from');
 		  $table->time('time_to');
-		  $table->double('price', 4, 3);
+		  $table->double('price', 10, 3);
 
 			$table->timestamps();
 			$table->softDeletes();
@@ -113,6 +123,7 @@ class InitialTable extends Migration {
 		Schema::drop('devices');
 		Schema::drop('devices_actions');
 		Schema::drop('devices_types');
+		Schema::drop('devices_modes');
 
 	}
 

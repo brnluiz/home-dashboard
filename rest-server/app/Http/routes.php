@@ -16,15 +16,13 @@ $app->get('/', function() use ($app) {
 });
 
 $app->get('/devices','App\Http\Controllers\DeviceController@index');
+$app->post('/devices','App\Http\Controllers\DeviceController@save');
  
 $app->get('/devices/{id}','App\Http\Controllers\DeviceController@get');
-
-$app->post('/devices','App\Http\Controllers\DeviceController@save');
-
 $app->put('/devices/{id}','App\Http\Controllers\DeviceController@update');
- 
 $app->delete('/devices/{id}','App\Http\Controllers\DeviceController@delete');
 
-$app->get('/devices/consum/{id}','App\Http\Controllers\DeviceController@meter');
+$app->get('/devices/{id}/stats','App\Http\Controllers\DeviceController@stats'); 
+
 
 // { connection: 'tcp', ip: '192.168.1.3', port: '80' }

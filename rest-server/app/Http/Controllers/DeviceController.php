@@ -41,9 +41,10 @@ class DeviceController extends Controller{
     return response()->json('success');
   }
  
+  // TODO: Just accepting x-www-form-urlencoded
   public function update(Request $request, $id) {
     $device  = Device::find($id);
- 
+
     if ( $request->input('name') ) 
       $device->name = $request->input('name');
     if ( $request->input('version') ) 
@@ -53,20 +54,25 @@ class DeviceController extends Controller{
     if ( $request->input('device_type_id') ) 
       $device->device_type_id = $request->input('device_type_id');
  
-    $device->save();
+    $device->save($request->all());
  
     return response()->json($device);
   }
 
-  public function meter($id) {
+  public function stats($id) {
     $device = Device::find($id);
     $settings = json_decode($device->settings);
-    $data = null;
 
-    if($settings->connection == 'tcp') {
-      $url = $settings->ip . ':' . $settings->port;
-      $data = null; // Implement device URL here
+    if($settings->mode == 'tcp') {
+      $url = 'http://'.$settings->ip . ':' . $settings->port;
     }
+    
+    $stats = file_get_contents($url.'/relay');
+    if(!$stats)
+      $data['error'] = 'Unavailable resource';
+
+    $data = json_decode($stats);
+      
 
     return response()->json($data);
   }

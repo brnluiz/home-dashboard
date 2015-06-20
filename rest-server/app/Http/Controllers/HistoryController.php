@@ -6,18 +6,20 @@ use App\HistoryType;
 use App\HistoryPower;
 use Illuminate\Http\Request;
 
-class HistoryController extends Controller{
+class HistoryController extends Controller {
 
-  public function index(){
- 
-    $histories = HistoryPower::all();
+  public function index(Request $request){
+
+    $histories = HistoryPower::paginate(30);
  
     return response()->json($histories);
   }
  
   public function get($id){
- 
-    $history  = HistoryPower::where(array( 'device_id' => $id ))->get();
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+    
+    $history  = HistoryPower::where(array( 'device_id' => $id ))->orderBy('id', 'DESC')->paginate(30);
 
     return response()->json($history);
   }

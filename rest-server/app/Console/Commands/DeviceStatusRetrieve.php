@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Device;
 use App\HistoryPower;
+use App\HistoryPrice;
 
 class DeviceStatusRetrieve extends Command
 {
@@ -21,6 +22,8 @@ class DeviceStatusRetrieve extends Command
    * @var string
    */
   protected $description = 'Retrieve status from the connected devices';
+
+  protected $price = 0;
 
   /**
    * Create a new command instance.
@@ -78,11 +81,15 @@ class DeviceStatusRetrieve extends Command
 
   private function smartPlug($device, $httpResponse)
   {
+    $this->price = (float)HistoryPrice::first()->price;
+
     $data['device_id']    = $device->id;
     $data['tension']      = $httpResponse->tension;
     $data['current']      = $httpResponse->current;
     $data['phase']        = $httpResponse->phase;
     $data['power_total']  = $data['tension'] * $data['current'];
+    echo 
+    $data['price']        = $data['power_total'] * ($this->price/60); // TODO: Change that to take from HistoryPrice
 
     return $data;
   }

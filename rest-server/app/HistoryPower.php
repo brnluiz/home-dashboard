@@ -10,7 +10,7 @@ class HistoryPower extends Model
     'device_id',
     'tension', 'current', 'phase', 
     'power_total', 'power_active', 'power_reactive',
-    'price '];
+    'price'];
 
     public function device($id) {
       return $this->belongsTo('App\Device', 'device_id');

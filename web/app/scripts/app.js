@@ -9,15 +9,15 @@
  * Main module of the application.
  */
 
-var app = angular
-  .module('app', [
+var app = angular.module('app', [
+    'ngRoute',
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'chart.js'
+    'chart.js',
   ])
 
 app.config(function ($routeProvider) {
@@ -34,9 +34,20 @@ app.config(function ($routeProvider) {
       templateUrl: 'views/devices.html',
       controller: 'DevicesCtrl'
     })
+    .when('/history/:param', {
+      templateUrl: 'views/history.html',
+      controller: 'HistoryCtrl'
+    })
     .otherwise({
       redirectTo: '/'
     });
+});
+
+app.filter('dateToISO', function() {
+  return function(input) {
+    input = new Date(input).toISOString();
+    return input;
+  };
 });
 
 $(document).ready(function () {
@@ -45,8 +56,12 @@ $(document).ready(function () {
      isClosed = false;
 
     trigger.click(function () {
-      hamburger_cross();      
+      hamburger_cross();
     });
+
+    $(".sidebar-nav a").click(function() {
+      trigger.click();
+    })
 
     function hamburger_cross() {
 
@@ -64,6 +79,10 @@ $(document).ready(function () {
   }
   
   $('[data-toggle="offcanvas"]').click(function () {
-        $('#wrapper').toggleClass('toggled');
-  });  
+    $('#wrapper').toggleClass('toggled');
+  });
+
+  $('.overlay').click(function() {
+    trigger.click();
+  })
 });

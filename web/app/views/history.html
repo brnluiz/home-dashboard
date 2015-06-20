@@ -1,0 +1,46 @@
+<div class="history-device">
+  <div class="row">
+    <div class="col-md-12 header">
+      <h1><i class="fa fa-pie-chart"></i> Device History</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <h2>Consumed power and Price</h2>
+      <canvas id="power-chart" class="chart chart-line" data="data"
+      labels="labels" legend="true" series="series" options="options"
+      click="onPowerChartClick">
+      </canvas> 
+    </div>
+  </div>
+
+  <div class="row">
+    <h2>Historic data</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Tension</th>
+          <th>Current</th>
+          <th>Spent Power</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in history">
+          <td>{{item.id}}</td>
+          <td>{{item.created_at | dateToISO | date:'dd-MM-yy'}}</td>
+          <td>{{item.created_at | dateToISO | date:'HH:mm:ss'}}</td>
+          <td>{{item.tension | number: 0}} V</td>
+          <td>{{item.current | number: 1}} A</td>
+          <td>{{item.power_total | number: 2}} W</td>
+          <td>R$ {{item.price | number: 2}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

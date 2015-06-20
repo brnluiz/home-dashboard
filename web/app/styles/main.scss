@@ -14,18 +14,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 $power-color: orange;
 $power-color-sub: #999;
-.home {
-  .header {
+.header {
+  text-align: center;
+  h1 {
     text-align: center;
-    h1 {
-      text-align: center;
-      padding: 10px 0 20px;
-      margin: 30px 0 45px;
-      font-size: 45px;
-      font-weight: 300;
-    }
-
+    padding: 10px 0 20px;
+    margin: 30px 0 45px;
+    font-size: 45px;
+    font-weight: 300;
   }
+
+}
+
+.home {
   .home-box-power {
     h2 {
       font-size: 76px;
@@ -41,7 +42,7 @@ $power-color-sub: #999;
     .list-group {
       border-radius: none;
       margin-top: 30px;
-
+      .fa{ margin-left: 5px; text-align: right; }
       .show-more {
         background: #f5f5f5;
         color: #333;
@@ -50,6 +51,32 @@ $power-color-sub: #999;
         &:hover { background: #eaeaea; }
         .fa{ margin-left: 5px }
       }
+    }
+  }
+}
+
+.history-device {
+  h2 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+  table {
+  }
+}
+
+.list-device {
+  h2 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+  tr {
+    &:hover {
+      cursor:pointer;
+      td {background: #eaeaea;}
     }
   }
 }

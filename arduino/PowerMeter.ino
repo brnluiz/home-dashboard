@@ -35,11 +35,12 @@ void update(char * params = "") {
 }
 
 void get(char * params = "") {
+  float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
   rest.addData("active", !relayState);
   rest.addData("tension", 220);
-  rest.addData("current", 1);
+  rest.addData("current", r);
   rest.addData("phase", 0);
-  rest.addData("power", 220 * 1);
+  rest.addData("power", (float)(220 * r));
 }
 /* *************************************************************** */
 

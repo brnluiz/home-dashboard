@@ -92,7 +92,7 @@ class InitialTable extends Migration {
 		  $table->date('date_start');
 		  $table->time('time_from');
 		  $table->time('time_to');
-		  $table->double('price', 10, 3);
+		  $table->double('price', 10, 8);
 
 			$table->timestamps();
 			$table->softDeletes();

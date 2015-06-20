@@ -10,10 +10,14 @@
       <h2>970 W</h2>
       <span class="power-label">Consuming at the moment</span>
 
-      <ul class="list-group">
-        <a href="#" class="list-group-item"><span class="badge">170 W</span> Garage Plug #1</a>
-        <a href="#" class="list-group-item"><span class="badge">500 W</span> Kitchen Plug #1</a>
-        <a href="#" class="list-group-item"><span class="badge">300 W</span> Shower</a>
+      <ul class="list-group" ng-repeat="device in devices">
+        <a  class="list-group-item" 
+            ng-repeat="device in devices"
+            href="#/history/{{device.id}}"
+            ng-click="goHistory({{device.id}})" >
+          <!-- <span class="badge">{{device.type.name}}</span> -->
+          {{device.name}} <i class="fa fa-angle-right"></i>
+        </a>
         <a href="#" class="list-group-item show-more">See full list <i class="fa fa-angle-right"></i></a>
       </ul>
 

@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the app
  */
-app.controller('MainCtrl', function ($scope, $timeout) {
+app.controller('MainCtrl', function ($scope, $timeout, $http) {
 
   $scope.labels = ["13h30", "13h35", "13h40", "13h45", "13h50", "13h55", "14h00"];
   $scope.data = [
@@ -22,10 +22,20 @@ app.controller('MainCtrl', function ($scope, $timeout) {
     scaleShowVerticalLines: true,
   };
   $scope.colours = {
-
   };
+  $scope.devices = {}
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
+  };
+
+  $http.get('http://localhost:8000/devices').
+    success(function(data) {
+      $scope.devices = data;
+  });
+
+  $scope.goHistory = function(id){
+    console.log(id);
+    return false;
   };
 
   $timeout(function () {

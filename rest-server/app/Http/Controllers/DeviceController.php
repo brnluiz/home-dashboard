@@ -10,14 +10,18 @@ use Illuminate\Http\Request;
 class DeviceController extends Controller{ 
 
   public function index(){
- 
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+
     $devices = Device::all();
- 
+    
     return response()->json($devices);
   }
  
   public function get($id){
- 
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+
     $device  = Device::find($id);
     $device->type;
     $device->mode;

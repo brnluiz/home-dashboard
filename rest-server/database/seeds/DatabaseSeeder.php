@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\DeviceMode;
 use App\DeviceType;
 use App\DeviceAction;
+use App\HistoryPrice;
 use App\Device;
 use App\Setting;
 
@@ -20,11 +21,36 @@ class DatabaseSeeder extends Seeder {
   {
     Model::unguard();
 
+    $this->call('HistoryPriceSeeder');
     $this->call('DeviceModeSeeder');
     $this->call('DeviceTypeSeeder');
     $this->call('DeviceActionSeeder');
     $this->call('DeviceSeeder');
     $this->call('SettingSeeder');
+  }
+
+}
+
+class HistoryPriceSeeder extends Seeder {
+
+  /**
+   * Run the database seeds.
+   *
+   * @return void
+   */
+  public function run()
+  {
+    $prices = array(
+      array(
+        'date_start' => date("Y-m-d H:i:s"),
+        'time_from' => '00:00:00',
+        'time_to' => '23:59:59',
+        'price' => '0.3451900',
+      ),
+    );
+    
+    foreach ($prices as $price) 
+      HistoryPrice::firstOrCreate($price);
   }
 
 }

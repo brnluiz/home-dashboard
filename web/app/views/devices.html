@@ -1,0 +1,31 @@
+<div class="list-device">
+  <div class="row">
+    <div class="col-md-12 header">
+      <h1><i class="fa fa-puzzel-piece"></i> All Installed Devices</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2>Device list</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr 
+          ng-repeat="item in devices"
+          ng-click="goToDevice({{item.id}})"
+        >
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.type.name}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
